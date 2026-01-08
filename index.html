@@ -1,225 +1,224 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>wassup.morte A.</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+<title>wassup.morte</title>
 
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
+<link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=UnifrakturCook:wght@700&display=swap" rel="stylesheet">
 
-    body{
-      background:#000;
-      color:#f2e9ff;
-      font-family:'Cinzel', serif;
-      min-height:100vh;
-      overflow-x:hidden;
-    }
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
 
-    /* VOID */
-    .void-bg{
-      position:fixed;
-      inset:0;
-      background:radial-gradient(circle at center, rgba(160,0,255,0.55) 0%, rgba(60,0,90,0.85) 35%, #000 70%);
-      z-index:-5;
-    }
+body{
+  background:#000;
+  color:#eee;
+  min-height:100vh;
+  overflow-x:hidden;
+  font-family:'Cinzel Decorative', serif;
+}
 
-    .fog{
-      position:fixed;
-      inset:0;
-      background:url('https://grainy-gradients.vercel.app/noise.svg');
-      opacity:0.12;
-      z-index:-4;
-      pointer-events:none;
-    }
+/* VOID */
+.void-bg{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at center, rgba(150,0,255,.55) 0%, rgba(50,0,80,.9) 40%, #000 75%);
+  z-index:-5;
+}
 
-    /* CAMPO VIVO */
-    .void-field{
-      position:fixed;
-      inset:0;
-      z-index:-3;
-      pointer-events:none;
-      overflow:hidden;
-    }
+.fog{
+  position:fixed;
+  inset:0;
+  background:url('https://grainy-gradients.vercel.app/noise.svg');
+  opacity:.15;
+  pointer-events:none;
+  z-index:-4;
+}
 
-    .mantra{
-      position:absolute;
-      font-size:0.75rem;
-      letter-spacing:3px;
-      text-transform:lowercase;
-      color:#2b0038;
-      text-shadow:
-        0 0 6px #fff,
-        0 0 14px rgba(180,0,255,0.9);
-      opacity:0.6;
-      animation: drift linear infinite;
-    }
+/* FUNDO VIVO */
+.void-field{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-3;
+  overflow:hidden;
+}
 
-    @keyframes drift{
-      from{transform:translateY(0)}
-      to{transform:translateY(-200vh)}
-    }
+.mantra{
+  position:absolute;
+  font-size:.8rem;
+  letter-spacing:4px;
+  text-transform:lowercase;
+  color:#120012;
+  text-shadow:
+    0 0 6px #fff,
+    0 0 14px rgba(180,0,255,.9);
+  opacity:.75;
+  animation:rise linear infinite;
+}
 
-    .bg-img{
-      position:absolute;
-      width:280px;
-      opacity:0.15;
-      filter:contrast(1.4) brightness(1.1) blur(0.3px)
-        drop-shadow(0 0 25px rgba(160,0,255,0.6));
-      animation: float 40s linear infinite;
-    }
+@keyframes rise{
+  from{transform:translateY(0)}
+  to{transform:translateY(-220vh)}
+}
 
-    @keyframes float{
-      from{transform:translateY(0)}
-      to{transform:translateY(-250vh)}
-    }
+.bg-img{
+  position:absolute;
+  width:360px;
+  opacity:.18;
+  filter:
+    contrast(1.4)
+    brightness(1.2)
+    drop-shadow(0 0 40px rgba(160,0,255,.8));
+  animation:float linear infinite;
+}
 
-    /* ENTIDADE CENTRAL */
-    .entity{
-      position:fixed;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      width:420px;
-      max-width:85vw;
-      opacity:0.95;
-      pointer-events:none;
-      z-index:-2;
-      filter:
-        contrast(1.6)
-        brightness(1.25)
-        drop-shadow(0 0 40px rgba(180,0,255,0.9))
-        drop-shadow(0 0 90px rgba(120,0,255,0.7));
-      animation: entityFloat 6s ease-in-out infinite;
-    }
+@keyframes float{
+  from{transform:translateY(0)}
+  to{transform:translateY(-260vh)}
+}
 
-    @keyframes entityFloat{
-      0%{transform:translate(-50%,-52%)}
-      50%{transform:translate(-50%,-48%)}
-      100%{transform:translate(-50%,-52%)}
-    }
+/* ENTIDADE CENTRAL */
+.entity{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:420px;
+  max-width:85vw;
+  z-index:1;
+  pointer-events:none;
+  filter:
+    contrast(1.6)
+    brightness(1.25)
+    drop-shadow(0 0 40px rgba(180,0,255,.9))
+    drop-shadow(0 0 90px rgba(120,0,255,.7));
+  animation:entityFloat 6s ease-in-out infinite;
+}
 
-    /* HERO */
-    .hero{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:40px 20px;
-      position:relative;
-      z-index:2;
-    }
+@keyframes entityFloat{
+  0%{transform:translate(-50%,-52%)}
+  50%{transform:translate(-50%,-48%)}
+  100%{transform:translate(-50%,-52%)}
+}
 
-    h1{
-      font-size:3.5rem;
-      font-weight:900;
-      letter-spacing:10px;
-      text-transform:uppercase;
-      color:#f3e8ff;
-      text-shadow:
-        0 0 8px #fff,
-        0 0 18px #b100ff,
-        0 0 40px #5a00aa;
-      animation:glitch 2.5s infinite;
-    }
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  z-index:2;
+}
 
-    @keyframes glitch{
-      0%{text-shadow:2px 0 red,-2px 0 cyan}
-      50%{text-shadow:-2px 0 red,2px 0 cyan}
-      100%{text-shadow:0 0 20px #b100ff}
-    }
+h1{
+  font-family:'UnifrakturCook', serif;
+  font-size:4rem;
+  letter-spacing:6px;
+  color:#f5eaff;
+  text-shadow:
+    0 0 8px #fff,
+    0 0 22px #b100ff,
+    0 0 60px #5a00aa;
+  animation:glitch 3s infinite;
+}
 
-    .ritual-line{
-      width:60%;
-      height:2px;
-      margin:30px auto;
-      background:linear-gradient(90deg, transparent, #b100ff, #ff00c8, #b100ff, transparent);
-      box-shadow:0 0 25px #b100ff;
-    }
+@keyframes glitch{
+  0%{text-shadow:2px 0 red,-2px 0 cyan}
+  50%{text-shadow:-2px 0 red,2px 0 cyan}
+  100%{text-shadow:0 0 30px #b100ff}
+}
 
-    .subtitle{
-      font-size:1rem;
-      letter-spacing:4px;
-      opacity:0.75;
-    }
+.ritual-line{
+  width:60%;
+  height:2px;
+  margin:30px auto;
+  background:linear-gradient(90deg,transparent,#b100ff,#ff00c8,#b100ff,transparent);
+  box-shadow:0 0 30px #b100ff;
+}
 
-    section{
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-size:2rem;
-      opacity:0;
-      transform:translateY(80px);
-      transition:1s;
-      z-index:2;
-    }
+.subtitle{
+  font-size:.9rem;
+  letter-spacing:5px;
+  opacity:.7;
+}
 
-    section.show{
-      opacity:1;
-      transform:translateY(0);
-    }
-  </style>
+section{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:2rem;
+  opacity:0;
+  transform:translateY(80px);
+  transition:1s;
+  z-index:2;
+}
+
+section.show{
+  opacity:1;
+  transform:translateY(0);
+}
+</style>
 </head>
 
 <body>
 
-  <div class="void-bg"></div>
-  <div class="fog"></div>
-  <div class="void-field" id="voidField"></div>
+<div class="void-bg"></div>
+<div class="fog"></div>
+<div class="void-field" id="voidField"></div>
 
-  <img class="entity" src="sigilo.jpeg" alt="morte void xiii">
+<img class="entity" src="sigilo.jpeg" alt="entidade">
 
-  <div class="hero">
-    <h1>wassup.morte A.</h1>
-    <div class="ritual-line"></div>
-    <div class="subtitle">RITUAL · VOID · UNDERGROUND</div>
-  </div>
+<div class="hero">
+  <h1>wassup.morte</h1>
+  <div class="ritual-line"></div>
+  <div class="subtitle">RITUAL · VOID · UNDERGROUND</div>
+</div>
 
-  <section>VÍDEOS</section>
-  <section>FOTOS</section>
-  <section>CONTATO</section>
+<section>VÍDEOS</section>
+<section>FOTOS</section>
+<section>CONTATO</section>
 
-  <script>
-    /* SCROLL REVEAL */
-    const sections=document.querySelectorAll("section");
-    const observer=new IntersectionObserver(entries=>{
-      entries.forEach(e=>e.isIntersecting&&e.target.classList.add("show"));
-    },{threshold:0.2});
-    sections.forEach(s=>observer.observe(s));
+<script>
+/* SCROLL */
+const sections=document.querySelectorAll("section");
+const obs=new IntersectionObserver(e=>{
+  e.forEach(i=>i.isIntersecting&&i.target.classList.add("show"));
+},{threshold:.2});
+sections.forEach(s=>obs.observe(s));
 
-    /* FUNDO VIVO */
-    const field=document.getElementById("voidField");
-    const words=["jesus.cristo","morte","amor"];
-    const demons=["demonio1.jpeg","demonio2.jpeg","buraco.jpeg"];
+/* FUNDO */
+const field=document.getElementById("voidField");
+const words=["jesus.cristo","morte","amor"];
+const imgs=["demonio1.jpeg","demonio2.jpeg","buraco.jpeg"];
 
-    function spawn(){
-      const el=Math.random()>0.6?document.createElement("img"):document.createElement("span");
+function spawn(){
+  let el;
+  if(Math.random()<.6){
+    el=document.createElement("span");
+    el.className="mantra";
+    el.textContent=words[Math.floor(Math.random()*words.length)];
+    el.style.left=Math.random()*100+"vw";
+    el.style.top="120vh";
+    el.style.animationDuration=30+Math.random()*30+"s";
+  }else{
+    el=document.createElement("img");
+    el.className="bg-img";
+    el.src=imgs[Math.floor(Math.random()*imgs.length)];
+    el.style.left=Math.random()*100+"vw";
+    el.style.top="120vh";
+    el.style.animationDuration=60+Math.random()*40+"s";
+  }
+  field.appendChild(el);
+  setTimeout(()=>el.remove(),120000);
+}
 
-      if(el.tagName==="SPAN"){
-        el.className="mantra";
-        el.textContent=words[Math.floor(Math.random()*words.length)];
-        el.style.left=Math.random()*100+"vw";
-        el.style.top="120vh";
-        el.style.animationDuration=20+Math.random()*30+"s";
-      }else{
-        el.className="bg-img";
-        el.src=demons[Math.floor(Math.random()*demons.length)];
-        el.style.left=Math.random()*100+"vw";
-        el.style.top="120vh";
-        el.style.animationDuration=35+Math.random()*40+"s";
-      }
-
-      field.appendChild(el);
-      setTimeout(()=>el.remove(),90000);
-    }
-
-    setInterval(spawn,900);
-  </script>
+setInterval(spawn,2400);
+</script>
 
 </body>
 </html>
