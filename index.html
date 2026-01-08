@@ -10,6 +10,83 @@
 *{margin:0;padding:0;box-sizing:border-box}
 
 body{
+  <body> 
+  <div class="entity">
+    <img src="simbolo.png" alt="morte void xiii">
+</div>
+
+/* =========================
+   ENTIDADE PRINCIPAL – MORTE VOID XIII
+   ========================= */
+
+.entity{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:0;
+    pointer-events:none;
+}
+
+.entity img{
+    width:520px;
+    max-width:80vw;
+    height:auto;
+    opacity:0.9;
+    filter:
+        contrast(1.4)
+        brightness(1.2)
+        drop-shadow(0 0 40px rgba(180,0,255,0.9))
+        drop-shadow(0 0 80px rgba(120,0,255,0.6));
+    animation: entityFloat 6s ease-in-out infinite;
+}
+
+/* flutuação lenta */
+@keyframes entityFloat{
+    0%{transform:translateY(-8px);}
+    50%{transform:translateY(8px);}
+    100%{transform:translateY(-8px);}
+}
+
+<div class="entity">
+    <img src="simbolo.png" alt="sigilo">
+</div>
+
+  .ritual-line {
+    position: fixed;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 100vh;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(160,0,255,0.8),
+        transparent
+    );
+    box-shadow: 0 0 25px rgba(160,0,255,0.8);
+    animation: ritualPulse 4s infinite ease-in-out;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes ritualPulse {
+    0%,100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+  .entity img {.entity {
+    opacity: 0.9;
+}
+
+    width: 420px;
+    height: auto;
+    filter: 
+        brightness(1.3)
+        contrast(1.4)
+        drop-shadow(0 0 35px rgba(160, 0, 255, 0.8));
+}
+
   background:#000;
   color:#f2f2f2;
   font-family:'Inter',sans-serif;
