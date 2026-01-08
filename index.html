@@ -1,171 +1,218 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>wassup.morte .</title>
+<meta charset="UTF-8">
+<title>wassup.love — morte void xiii</title>
 
-  <!-- Fonte ritual/demoniaca -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
 
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box}
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
 
-    body{
-      background:#000;
-      color:#f2e9ff;
-      font-family:'Cinzel', serif;
-      min-height:100vh;
-      overflow-x:hidden;
-    }
+body{
+  background:#000;
+  color:#f2f2f2;
+  font-family:'Inter',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+}
 
-    /* Fundo roxo void */
-    .void-bg{
-      position:fixed;
-      inset:0;
-      background:radial-gradient(circle at center, rgba(160,0,255,0.55) 0%, rgba(60,0,90,0.85) 35%, #000 70%);
-      z-index:-3;
-    }
+/* noise overlay */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:.08;
+  pointer-events:none;
+  z-index:5;
+}
 
-    /* Névoa */
-    .fog{
-      position:fixed;
-      inset:0;
-      background:url('https://grainy-gradients.vercel.app/noise.svg');
-      opacity:0.12;
-      z-index:-2;
-      pointer-events:none;
-    }
+/* =========================
+   ENTIDADE — MORTE VOID XIII
+   ========================= */
+.entity{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:520px;
+  max-width:85vw;
+  opacity:0.9;
+  pointer-events:none;
+  z-index:1;
 
-    /* Entidade / demônio central */
-    .entity{
-      position:fixed;
-      top:50%;
-      left:50%;
-      transform:translate(-50%,-50%);
-      width:420px;
-      max-width:85vw;
-      opacity:0.95;
-      pointer-events:none;
-      z-index:-1;
-      filter:
-        contrast(1.6)
-        brightness(1.25)
-        drop-shadow(0 0 40px rgba(180,0,255,0.9))
-        drop-shadow(0 0 90px rgba(120,0,255,0.7));
-      animation: entityFloat 6s ease-in-out infinite;
-    }
+  animation: spin 38s linear infinite;
 
-    @keyframes entityFloat{
-      0%{transform:translate(-50%,-52%);}
-      50%{transform:translate(-50%,-48%);}
-      100%{transform:translate(-50%,-52%);}
-    }
+  filter:
+    contrast(1.9)
+    brightness(1.3)
+    saturate(1.2)
+    drop-shadow(0 0 60px rgba(180,0,255,1))
+    drop-shadow(0 0 120px rgba(90,0,255,0.8));
+}
 
-    /* Hero */
-    .hero{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:40px 20px;
-      position:relative;
-      z-index:2;
-    }
+@keyframes spin{
+  from{transform:translate(-50%,-50%) rotate(0deg)}
+  to{transform:translate(-50%,-50%) rotate(360deg)}
+}
 
-    h1{
-      font-size:3.5rem;
-      font-weight:900;
-      letter-spacing:10px;
-      text-transform:uppercase;
-      color:#f3e8ff;
-      text-shadow:
-        0 0 8px #fff,
-        0 0 18px #b100ff,
-        0 0 40px #5a00aa;
-      animation:glitch 2.5s infinite;
-    }
+/* ritual line */
+.ritual-line{
+  position:fixed;
+  left:50%;
+  top:0;
+  width:2px;
+  height:100vh;
+  background:linear-gradient(
+    to bottom,
+    transparent,
+    rgba(160,0,255,0.9),
+    transparent
+  );
+  box-shadow:0 0 30px rgba(160,0,255,0.9);
+  animation:ritualPulse 3.5s infinite ease-in-out;
+  pointer-events:none;
+  z-index:2;
+}
 
-    @keyframes glitch{
-      0%{text-shadow:2px 0 red,-2px 0 cyan}
-      20%{text-shadow:-2px 0 red,2px 0 cyan}
-      40%{text-shadow:2px 2px red,-2px -2px cyan}
-      60%{text-shadow:-2px -2px red,2px 2px cyan}
-      80%{text-shadow:2px 0 red,-2px 0 cyan}
-      100%{text-shadow:0 0 20px #b100ff}
-    }
+@keyframes ritualPulse{
+  0%,100%{opacity:.15}
+  50%{opacity:1}
+}
 
-    .ritual-line{
-      width:60%;
-      height:2px;
-      margin:30px auto;
-      background:linear-gradient(90deg, transparent, #b100ff, #ff00c8, #b100ff, transparent);
-      box-shadow:0 0 25px #b100ff;
-      animation:linepulse 3s ease-in-out infinite;
-    }
+/* header */
+header{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  position:relative;
+  z-index:3;
+}
 
-    @keyframes linepulse{
-      0%,100%{opacity:0.4}
-      50%{opacity:1}
-    }
+/* logo topo */
+.logo{
+  width:160px;
+  animation:spin 20s linear infinite;
+  filter:drop-shadow(0 0 30px rgba(160,0,255,0.8));
+}
 
-    .subtitle{
-      font-size:1rem;
-      letter-spacing:4px;
-      opacity:0.75;
-    }
+/* glitch title */
+h1{
+  margin-top:20px;
+  font-size:3.4rem;
+  font-weight:900;
+  letter-spacing:6px;
+  position:relative;
+  text-transform:uppercase;
+}
 
-    section{
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-size:2rem;
-      opacity:0;
-      transform:translateY(80px);
-      transition:1s;
-    }
+h1::before,
+h1::after{
+  content:"MORTE VOID XIII";
+  position:absolute;
+  left:0;
+  width:100%;
+  opacity:.75;
+}
 
-    section.show{
-      opacity:1;
-      transform:translateY(0);
-    }
+h1::before{
+  top:-2px;
+  color:#a000ff;
+}
 
-  </style>
+h1::after{
+  top:2px;
+  color:#00ffff;
+}
+
+/* products */
+section{
+  padding:80px 20px;
+  max-width:900px;
+  margin:auto;
+  position:relative;
+  z-index:3;
+}
+
+.products{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:30px;
+}
+
+.product{
+  background:#0a0a0a;
+  padding:20px;
+  border:1px solid #111;
+  box-shadow:0 0 30px rgba(120,0,255,0.15);
+}
+
+.product img{
+  width:100%;
+  display:block;
+}
+
+.price{
+  margin:15px 0;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+.buy{
+  display:inline-block;
+  margin-top:10px;
+  padding:12px 20px;
+  border:1px solid #fff;
+  color:#fff;
+  text-decoration:none;
+  letter-spacing:2px;
+  transition:.2s;
+}
+
+.buy:hover{
+  background:#fff;
+  color:#000;
+}
+</style>
 </head>
+
 <body>
 
-  <div class="void-bg"></div>
-  <div class="fog"></div>
+<!-- ENTIDADE -->
+<img src="simbolo.png" class="entity">
 
-  <!-- TROQUE simbolo.png pela sua imagem real do demônio/sigilo -->
-  <img class="entity" src="simbolo.png" alt="morte void xiii">
+<!-- RITUAL LINE -->
+<div class="ritual-line"></div>
 
-  <div class="hero">
-    <h1>wassup.morte.</h1>
-    <div class="ritual-line"></div>
-    <div class="subtitle">RITUAL ·  · UNDERGROUND</div>
+<header>
+  <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Bat_icon.svg">
+  <h1>MORTE VOID XIII</h1>
+</header>
+
+<section>
+  <div class="products">
+
+    <div class="product">
+      <img src="calca1.jpg">
+      <div class="price">R$ 320</div>
+      <a class="buy" href="https://wa.me/55SEUNUMERO">COMPRAR</a>
+    </div>
+
+    <div class="product">
+      <img src="calca2.jpg">
+      <div class="price">R$ 350</div>
+      <a class="buy" href="https://wa.me/55SEUNUMERO">COMPRAR</a>
+    </div>
+
   </div>
-
-  <section>VÍDEOS</section>
-  <section>FOTOS</section>
-  <section>CONTATO</section>
-
-  <script>
-    const sections = document.querySelectorAll('section');
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.2 });
-
-    sections.forEach(section => observer.observe(section));
-  </script>
+</section>
 
 </body>
 </html>
+
+
+
