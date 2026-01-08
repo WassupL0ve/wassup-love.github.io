@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>wassup.morte A.</title>
 
-  <!-- Fonte ritual/demoniaca -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 
   <style>
@@ -19,25 +18,65 @@
       overflow-x:hidden;
     }
 
-    /* Fundo roxo void */
+    /* VOID */
     .void-bg{
       position:fixed;
       inset:0;
       background:radial-gradient(circle at center, rgba(160,0,255,0.55) 0%, rgba(60,0,90,0.85) 35%, #000 70%);
-      z-index:-3;
+      z-index:-5;
     }
 
-    /* Névoa */
     .fog{
       position:fixed;
       inset:0;
       background:url('https://grainy-gradients.vercel.app/noise.svg');
       opacity:0.12;
-      z-index:-2;
+      z-index:-4;
       pointer-events:none;
     }
 
-    /* Entidade / demônio central */
+    /* CAMPO VIVO */
+    .void-field{
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      pointer-events:none;
+      overflow:hidden;
+    }
+
+    .mantra{
+      position:absolute;
+      font-size:0.75rem;
+      letter-spacing:3px;
+      text-transform:lowercase;
+      color:#2b0038;
+      text-shadow:
+        0 0 6px #fff,
+        0 0 14px rgba(180,0,255,0.9);
+      opacity:0.6;
+      animation: drift linear infinite;
+    }
+
+    @keyframes drift{
+      from{transform:translateY(0)}
+      to{transform:translateY(-200vh)}
+    }
+
+    .bg-img{
+      position:absolute;
+      width:280px;
+      opacity:0.15;
+      filter:contrast(1.4) brightness(1.1) blur(0.3px)
+        drop-shadow(0 0 25px rgba(160,0,255,0.6));
+      animation: float 40s linear infinite;
+    }
+
+    @keyframes float{
+      from{transform:translateY(0)}
+      to{transform:translateY(-250vh)}
+    }
+
+    /* ENTIDADE CENTRAL */
     .entity{
       position:fixed;
       top:50%;
@@ -47,7 +86,7 @@
       max-width:85vw;
       opacity:0.95;
       pointer-events:none;
-      z-index:-1;
+      z-index:-2;
       filter:
         contrast(1.6)
         brightness(1.25)
@@ -57,12 +96,12 @@
     }
 
     @keyframes entityFloat{
-      0%{transform:translate(-50%,-52%);}
-      50%{transform:translate(-50%,-48%);}
-      100%{transform:translate(-50%,-52%);}
+      0%{transform:translate(-50%,-52%)}
+      50%{transform:translate(-50%,-48%)}
+      100%{transform:translate(-50%,-52%)}
     }
 
-    /* Hero */
+    /* HERO */
     .hero{
       min-height:100vh;
       display:flex;
@@ -90,10 +129,7 @@
 
     @keyframes glitch{
       0%{text-shadow:2px 0 red,-2px 0 cyan}
-      20%{text-shadow:-2px 0 red,2px 0 cyan}
-      40%{text-shadow:2px 2px red,-2px -2px cyan}
-      60%{text-shadow:-2px -2px red,2px 2px cyan}
-      80%{text-shadow:2px 0 red,-2px 0 cyan}
+      50%{text-shadow:-2px 0 red,2px 0 cyan}
       100%{text-shadow:0 0 20px #b100ff}
     }
 
@@ -103,12 +139,6 @@
       margin:30px auto;
       background:linear-gradient(90deg, transparent, #b100ff, #ff00c8, #b100ff, transparent);
       box-shadow:0 0 25px #b100ff;
-      animation:linepulse 3s ease-in-out infinite;
-    }
-
-    @keyframes linepulse{
-      0%,100%{opacity:0.4}
-      50%{opacity:1}
     }
 
     .subtitle{
@@ -126,22 +156,23 @@
       opacity:0;
       transform:translateY(80px);
       transition:1s;
+      z-index:2;
     }
 
     section.show{
       opacity:1;
       transform:translateY(0);
     }
-
   </style>
 </head>
+
 <body>
 
   <div class="void-bg"></div>
   <div class="fog"></div>
+  <div class="void-field" id="voidField"></div>
 
-  <!-- TROQUE simbolo.png pela sua imagem real do demônio/sigilo -->
-  <img class="entity" src="simbolo.png" alt="morte void xiii">
+  <img class="entity" src="sigilo.jpeg" alt="morte void xiii">
 
   <div class="hero">
     <h1>wassup.morte A.</h1>
@@ -154,17 +185,40 @@
   <section>CONTATO</section>
 
   <script>
-    const sections = document.querySelectorAll('section');
+    /* SCROLL REVEAL */
+    const sections=document.querySelectorAll("section");
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(e=>e.isIntersecting&&e.target.classList.add("show"));
+    },{threshold:0.2});
+    sections.forEach(s=>observer.observe(s));
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.2 });
+    /* FUNDO VIVO */
+    const field=document.getElementById("voidField");
+    const words=["jesus.cristo","morte","amor"];
+    const demons=["demonio1.jpeg","demonio2.jpeg","buraco.jpeg"];
 
-    sections.forEach(section => observer.observe(section));
+    function spawn(){
+      const el=Math.random()>0.6?document.createElement("img"):document.createElement("span");
+
+      if(el.tagName==="SPAN"){
+        el.className="mantra";
+        el.textContent=words[Math.floor(Math.random()*words.length)];
+        el.style.left=Math.random()*100+"vw";
+        el.style.top="120vh";
+        el.style.animationDuration=20+Math.random()*30+"s";
+      }else{
+        el.className="bg-img";
+        el.src=demons[Math.floor(Math.random()*demons.length)];
+        el.style.left=Math.random()*100+"vw";
+        el.style.top="120vh";
+        el.style.animationDuration=35+Math.random()*40+"s";
+      }
+
+      field.appendChild(el);
+      setTimeout(()=>el.remove(),90000);
+    }
+
+    setInterval(spawn,900);
   </script>
 
 </body>
