@@ -130,10 +130,33 @@ section{
   background:#fff;
   color:#000;
 }
+.entity{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  transform: translate(-50%, -50%);
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 0;
+
+  animation: spin 40s linear infinite;
+
+  filter:
+    drop-shadow(0 0 20px #a000ff)
+    drop-shadow(0 0 40px #8000ff)
+    drop-shadow(0 0 80px #5000aa);
+}
+
+@keyframes spin {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
 </style>
 </head>
 
 <body>
+<img src="simbolo.png" class="entity">
 
 <header>
   <!-- morcego provisório -->
@@ -158,6 +181,14 @@ section{
 
   </div>
 </section>
+<script>
+  const entity = document.querySelector('.entity');
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    entity.style.transform = `translate(-50%, calc(-50% + ${scrollY * 0.2}px)) rotate(${scrollY * 0.3}deg)`;
+  });
+</script>
 
 </body>
 </html>
