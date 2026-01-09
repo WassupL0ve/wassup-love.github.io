@@ -8,6 +8,43 @@
 
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
+#errorLayer{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-1;
+}
+
+.error-text{
+  position:absolute;
+  font-family:'Cinzel', serif;
+  font-size:0.9rem;
+  color:rgba(120,0,180,0.75);
+  text-transform:lowercase;
+  letter-spacing:2px;
+  opacity:0;
+  animation:fadeFloat 14s ease-in-out forwards;
+  text-shadow:
+    0 0 6px rgba(255,255,255,0.25),
+    0 0 14px rgba(140,0,255,0.4);
+}
+
+@keyframes fadeFloat{
+  0%{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  20%{
+    opacity:0.6;
+  }
+  80%{
+    opacity:0.6;
+  }
+  100%{
+    opacity:0;
+    transform:translateY(-40px);
+  }
+}
 
 body{
   background:#000;
@@ -80,6 +117,8 @@ section{
 </head>
 
 <body>
+  <div id="errorLayer"></div>
+
 
 <div class="void-bg"></div>
 <div class="fog"></div>
@@ -94,8 +133,8 @@ section{
 <section></section>
 
 <script>
-const phrases=[
-  "69","69","69","69","69",
+const phrases = [
+  "69","69","69","69","69","69","69",
   "jesus cristo reina",
   "morte",
   "loves",
@@ -104,10 +143,34 @@ const phrases=[
   "jesus jesus"
 ];
 
-const layer=document.getElementById("errorLayer");
+const layer = document.getElementById("errorLayer");
+let lastScroll = window.scrollY;
 
-function spawn(amount){
+function spawnErrorBatch(amount){
   for(let i=0;i<amount;i++){
-    const t=document.createElement("div");
-    t.className="error-text";
-    t.innerText=phr
+    const el = document.createElement("div");
+    el.className = "error-text";
+    el.innerText = phrases[Math.floor(Math.random()*phrases.length)];
+
+    el.style.top = Math.random()*100 + "%";
+    el.style.left = Math.random()*100 + "%";
+    el.style.fontSize = (0.7 + Math.random()*0.7) + "rem";
+
+    layer.appendChild(el);
+    setTimeout(()=>el.remove(),15000);
+  }
+}
+
+/* primeiro suspiro — IMPORTANTÍSSIMO */
+spawnErrorBatch(6);
+
+window.addEventListener("scroll", () => {
+  const currentScroll = window.scrollY;
+
+  if(Math.abs(currentScroll - lastScroll) > 50){
+    spawnErrorBatch(3 + Math.floor(Math.random()*5));
+    lastScroll = currentScroll;
+  }
+});
+</script>
+
