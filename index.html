@@ -147,18 +147,48 @@
   <section>FOTOS</section>
   <section>CONTATO</section>
 
-  <script>
-    const sections = document.querySelectorAll('section');
+<script>
+const phrases = [
+  "69","69","69","69","69","69",
+  "jesus cristo reina",
+  "morte",
+  "loves",
+  "error69",
+  "666",
+  "jesus jesus"
+];
 
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting){
-          entry.target.classList.add('show');
-        }
-      });
-    }, { threshold: 0.2 });
+const layer = document.getElementById("errorLayer");
+let lastScroll = 0;
 
-    sections.forEach(section => observer.observe(section));
+function spawnErrorBatch(amount){
+  for(let i=0;i<amount;i++){
+    const el = document.createElement("div");
+    el.className = "error-text";
+    el.innerText = phrases[Math.floor(Math.random()*phrases.length)];
+
+    el.style.top = Math.random()*100 + "%";
+    el.style.left = Math.random()*100 + "%";
+    el.style.fontSize = (0.6 + Math.random()*0.6) + "rem";
+    el.style.animationDuration = 8 + Math.random()*10 + "s";
+
+    layer.appendChild(el);
+
+    setTimeout(()=>el.remove(),16000);
+  }
+}
+
+window.addEventListener("scroll", () => {
+  const currentScroll = window.scrollY;
+
+  if(Math.abs(currentScroll - lastScroll) > 40){
+    spawnErrorBatch(4 + Math.floor(Math.random()*6));
+    lastScroll = currentScroll;
+  }
+});
+</script>
+
+
   </script>
 
 </body>
