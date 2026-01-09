@@ -101,57 +101,55 @@ h1{
   text-align:center;
 }
 
-.product-video{
-  width:100%;
-  max-height:90vh;
-  object-fit:cover;
-  filter:contrast(1.1) brightness(0.9);
-  margin-bottom:60px;
+/* ===== RIFA ===== */
+
+.rifa-section{
+  padding:140px 20px;
+  text-align:center;
+  border-top:1px solid rgba(180,0,255,0.2);
 }
 
-.product-images{
-  display:flex;
-  gap:30px;
-  justify-content:center;
-  flex-wrap:wrap;
-  margin-bottom:40px;
-}
-
-.product-images img{
-  width:320px;
-  max-width:90vw;
-  filter:drop-shadow(0 0 20px rgba(180,0,255,0.6));
-}
-
-.product-text h2{
-  font-size:2rem;
-  letter-spacing:4px;
+.rifa-section h2{
+  font-size:2.2rem;
+  letter-spacing:6px;
   margin-bottom:15px;
 }
 
-.product-text p{
-  opacity:0.8;
-  margin-bottom:8px;
+.rifa-price{
+  font-size:1.8rem;
+  margin-bottom:30px;
 }
 
-.price{
-  font-size:1.4rem;
-  margin:20px 0;
-}
-
-.buy-btn{
+.rifa-btn{
   display:inline-block;
-  padding:14px 40px;
-  border:1px solid #b100ff;
+  padding:26px 70px;
+  font-size:1.6rem;
+  letter-spacing:5px;
   color:#fff;
   text-decoration:none;
-  letter-spacing:3px;
-  transition:0.3s;
+  border:2px solid #7b00ff;
+  animation:blink 1.3s infinite, shake 0.18s infinite;
+  box-shadow:0 0 30px rgba(120,0,255,0.8);
 }
 
-.buy-btn:hover{
-  background:#b100ff;
-  box-shadow:0 0 25px #b100ff;
+.rifa-desc{
+  margin-top:35px;
+  font-size:0.95rem;
+  opacity:0.85;
+  line-height:1.6;
+}
+
+@keyframes blink{
+  0%,100%{opacity:1;}
+  50%{opacity:0.55;}
+}
+
+@keyframes shake{
+  0%{transform:translate(0);}
+  25%{transform:translate(-1px,1px);}
+  50%{transform:translate(1px,-1px);}
+  75%{transform:translate(-1px,-1px);}
+  100%{transform:translate(1px,1px);}
 }
 </style>
 </head>
@@ -166,41 +164,29 @@ h1{
   <h1>wassup.morte</h1>
 </div>
 
-<section class="product-section">
+<!-- RIFA -->
+<section class="rifa-section">
 
-  <video class="product-video" autoplay muted loop playsinline>
-    <source src="sktrouses0.mp4" type="video/mp4">
-  </video>
+  <h2>⛧ R.I.F.A — LIMITED ⛧</h2>
+  <div class="rifa-price">MYsTERIO.L0VE — $7.69</div>
 
-  <div class="product-images">
-    <img src="rouses1.png">
-    <img src="mysteriorouses.jpg">
-  </div>
+  <a class="rifa-btn"
+     href="https://wa.me/5511978432947?text=⛧%20RIFA%20MYsTERIO.L0VE%20⛧%0AValor:%20$7.69%0APix:%2069morcegospix@gmail.com%0AJá%20realizei%20o%20pagamento.%0ASegue%20o%20comprovante:"
+     target="_blank">
+     COMPRAR
+  </a>
 
-  <div class="product-text">
-    <h2>calça wassup.morte</h2>
-    <p>todas cores da paleta que deus lançou</p>
-    <p>edição limitada</p>
-    <p class="price">$178.69</p>
-
-    <a class="buy-btn"
-      href="https://wa.me/5511978432947?text=-M0rceg0s%3B%20iai%20Wassup.Morte!!%20Tenho%20desejo%20em%20adquirir%20uma%20MYSTERIO"
-      target="_blank">
-      comprar
-    </a>
+  <div class="rifa-desc">
+    ⛧ Mysterio PRETA ou PRETA.ROXO ⛧<br>
+    Model Terrível. Única.<br>
+    100 números vendidos = frete grátis para todo o BR<br><br>
+    Pix: <strong>69morcegospix@gmail.com</strong>
   </div>
 
 </section>
 
 <script>
-const phrases=[
-  "69","69","69",
-  "jesus cristo reina",
-  "morte","loves",
-  "error69","666",
-  "jesus jesus"
-];
-
+const phrases=["69","666","morte","error","jesus"];
 const errorLayer=document.getElementById("error-layer");
 let lastScroll=0;
 
@@ -216,23 +202,9 @@ function spawnWords(q){
   }
 }
 
-function spawnDemon(){
-  const d=document.createElement("img");
-  d.className="demon";
-  d.src=Math.random()>0.5
-    ? "demonio1-removebg-preview.png"
-    : "demonio2-removebg-preview.png";
-
-  d.style.top=Math.random()*60+"%";
-  d.style.left=Math.random()*70+"%";
-  document.body.appendChild(d);
-  setTimeout(()=>d.remove(),10000);
-}
-
 window.addEventListener("scroll",()=>{
   if(Math.abs(scrollY-lastScroll)>40){
-    spawnWords(4+Math.floor(Math.random()*5));
-    spawnDemon();
+    spawnWords(4);
     lastScroll=scrollY;
   }
 });
@@ -240,4 +212,3 @@ window.addEventListener("scroll",()=>{
 
 </body>
 </html>
-
