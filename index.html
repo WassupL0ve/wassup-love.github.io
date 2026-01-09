@@ -1,195 +1,181 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>WASSUP.MORTE</title>
+<meta charset="UTF-8">
+<title>WASSUP.MORTE</title>
 
-  <!-- Fonte ritual + demoníaca -->
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 
-  <style>
-    *{margin:0;padding:0;box-sizing:border-box;}
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
 
-    body{
-      background:#000;
-      color:#f2f2f2;
-      font-family:'Cinzel', serif;
-      min-height:100vh;
-      overflow-x:hidden;
-    }
+body{
+  background:#000;
+  color:#f2f2f2;
+  font-family:'Cinzel', serif;
+  overflow-x:hidden;
+}
 
-    /* Fundo roxo vivo */
-    .void-bg{
-      position:fixed;
-      inset:0;
-      background:radial-gradient(circle at center, rgba(140,0,255,0.45) 0%, rgba(40,0,70,0.85) 35%, #000 70%);
-      z-index:-2;
-    }
+/* VOID */
+.void-bg{
+  position:fixed;
+  inset:0;
+  background:radial-gradient(circle at center, rgba(140,0,255,.45), rgba(40,0,70,.85), #000 70%);
+  z-index:-4;
+}
 
-    /* Fumaça / névoa */
-    .fog{
-      position:fixed;
-      inset:0;
-      background:url('https://i.imgur.com/N9bG5cQ.png');
-      opacity:0.08;
-      animation:fogmove 60s linear infinite;
-      z-index:-1;
-    }
+/* FOG */
+.fog{
+  position:fixed;
+  inset:0;
+  background:url('https://i.imgur.com/N9bG5cQ.png');
+  opacity:.08;
+  animation:fogmove 60s linear infinite;
+  z-index:-3;
+}
+@keyframes fogmove{
+  to{background-position:1000px 1000px;}
+}
 
-    @keyframes fogmove{
-      from{background-position:0 0;}
-      to{background-position:1000px 1000px;}
-    }
+/* TEXTO DO FUNDO */
+#errorLayer{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:-2;
+}
 
-    .hero{
-      min-height:100vh;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
-      align-items:center;
-      text-align:center;
-      padding:40px;
-    }
+.error-text{
+  position:absolute;
+  font-size:.75rem;
+  text-transform:lowercase;
+  color:rgba(80,0,120,.55);
+  text-shadow:
+    0 0 4px rgba(255,255,255,.35),
+    0 0 12px rgba(150,0,255,.6);
+  animation:fadeFloat linear forwards;
+}
 
-    /* Símbolo central */
-    .sigil{
-      width:320px;
-      max-width:80vw;
-      margin-bottom:30px;
-      filter:drop-shadow(0 0 25px rgba(180,0,255,0.8));
-      animation:pulse 4s ease-in-out infinite;
-    }
+@keyframes fadeFloat{
+  0%{opacity:0; transform:translateY(10px);}
+  10%{opacity:1;}
+  90%{opacity:1;}
+  100%{opacity:0; transform:translateY(-20px);}
+}
 
-    @keyframes pulse{
-      0%,100%{filter:drop-shadow(0 0 15px rgba(180,0,255,0.6));}
-      50%{filter:drop-shadow(0 0 40px rgba(200,0,255,1));}
-    }
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
 
-    h1{
-      font-size:4rem;
-      font-weight:900;
-      letter-spacing:10px;
-      text-transform:uppercase;
-      color:#e8d8ff;
-      text-shadow:
-        0 0 5px #fff,
-        0 0 15px #9a00ff,
-        0 0 30px #5a00aa;
-      animation:glitch 2.5s infinite;
-    }
+.sigil{
+  width:320px;
+  filter:drop-shadow(0 0 25px rgba(180,0,255,.8));
+  animation:pulse 4s infinite;
+}
+@keyframes pulse{
+  50%{filter:drop-shadow(0 0 45px rgba(200,0,255,1));}
+}
 
-    /* Glitch ritual */
-    @keyframes glitch{
-      0%{text-shadow:2px 0 red,-2px 0 cyan;}
-      20%{text-shadow:-2px 0 red,2px 0 cyan;}
-      40%{text-shadow:2px 2px red,-2px -2px cyan;}
-      60%{text-shadow:-2px -2px red,2px 2px cyan;}
-      80%{text-shadow:2px 0 red,-2px 0 cyan;}
-      100%{text-shadow:0 0 15px #9a00ff;}
-    }
+h1{
+  font-size:4rem;
+  letter-spacing:10px;
+  text-transform:uppercase;
+  text-shadow:
+    0 0 5px #fff,
+    0 0 20px #9a00ff,
+    0 0 40px #5a00aa;
+  animation:glitch 2.5s infinite;
+}
 
-    .ritual-line{
-      width:60%;
-      height:2px;
-      margin:30px auto;
-      background:linear-gradient(90deg, transparent, #b100ff, #ff00c8, #b100ff, transparent);
-      box-shadow:0 0 20px #b100ff;
-      animation:linepulse 3s ease-in-out infinite;
-    }
+@keyframes glitch{
+  20%{text-shadow:-2px 0 red,2px 0 cyan;}
+  40%{text-shadow:2px 2px red,-2px -2px cyan;}
+  60%{text-shadow:-2px -2px red,2px 2px cyan;}
+}
 
-    @keyframes linepulse{
-      0%,100%{opacity:0.4;}
-      50%{opacity:1;}
-    }
+.ritual-line{
+  width:60%;
+  height:2px;
+  margin:30px;
+  background:linear-gradient(90deg,transparent,#b100ff,#ff00c8,#b100ff,transparent);
+}
 
-    .subtitle{
-      font-size:1.1rem;
-      letter-spacing:4px;
-      opacity:0.75;
-    }
-
-    /* Seções que aparecem no scroll */
-    section{
-      min-height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      font-size:2rem;
-      opacity:0;
-      transform:translateY(80px);
-      transition:1s;
-    }
-
-    section.show{
-      opacity:1;
-      transform:translateY(0);
-    }
-
-  </style>
+section{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:2rem;
+  opacity:0;
+  transform:translateY(80px);
+  transition:1s;
+}
+section.show{
+  opacity:1;
+  transform:none;
+}
+</style>
 </head>
+
 <body>
 
-  <div class="void-bg"></div>
-  <div class="fog"></div>
+<div class="void-bg"></div>
+<div class="fog"></div>
+<div id="errorLayer"></div>
 
-  <div class="hero">
-    <!-- Troca o src pela sua imagem real do símbolo/demônio -->
-    <img class="sigil" src="https://i.imgur.com/3KXQZcF.png" alt="sigilo">
+<div class="hero">
+  <img class="sigil" src="https://i.imgur.com/3KXQZcF.png">
+  <h1>wassup.morte</h1>
+  <div class="ritual-line"></div>
+</div>
 
-    <h1>WASSUP.MORTE</h1>
-
-    <div class="ritual-line"></div>
-
-    <div class="subtitle">RITUAL · VOID · UNDERGROUND</div>
-  </div>
-
-  <section>VÍDEOS</section>
-  <section>FOTOS</section>
-  <section>CONTATO</section>
+<section>VÍDEOS</section>
+<section>FOTOS</section>
+<section>CONTATO</section>
 
 <script>
-const phrases = [
-  "69","69","69","69","69","69",
-  "jesus cristo reina",
-  "morte",
-  "loves",
-  "error69",
-  "666",
-  "jesus jesus"
+const phrases=[
+"69","69","69","69","69",
+"jesus cristo reina",
+"morte","loves",
+"error69","666",
+"jesus jesus"
 ];
 
-const layer = document.getElementById("errorLayer");
-let lastScroll = 0;
+const layer=document.getElementById("errorLayer");
+let lastScroll=0;
 
-function spawnErrorBatch(amount){
+function spawn(amount){
   for(let i=0;i<amount;i++){
-    const el = document.createElement("div");
-    el.className = "error-text";
-    el.innerText = phrases[Math.floor(Math.random()*phrases.length)];
-
-    el.style.top = Math.random()*100 + "%";
-    el.style.left = Math.random()*100 + "%";
-    el.style.fontSize = (0.6 + Math.random()*0.6) + "rem";
-    el.style.animationDuration = 8 + Math.random()*10 + "s";
-
-    layer.appendChild(el);
-
-    setTimeout(()=>el.remove(),16000);
+    const t=document.createElement("div");
+    t.className="error-text";
+    t.innerText=phrases[Math.floor(Math.random()*phrases.length)];
+    t.style.top=Math.random()*100+"%";
+    t.style.left=Math.random()*100+"%";
+    t.style.animationDuration=(8+Math.random()*10)+"s";
+    layer.appendChild(t);
+    setTimeout(()=>t.remove(),16000);
   }
 }
 
-window.addEventListener("scroll", () => {
-  const currentScroll = window.scrollY;
-
-  if(Math.abs(currentScroll - lastScroll) > 40){
-    spawnErrorBatch(4 + Math.floor(Math.random()*6));
-    lastScroll = currentScroll;
+window.addEventListener("scroll",()=>{
+  if(Math.abs(scrollY-lastScroll)>40){
+    spawn(6+Math.floor(Math.random()*6));
+    lastScroll=scrollY;
   }
 });
+
+const obs=new IntersectionObserver(e=>{
+  e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"))
+},{threshold:.2});
+document.querySelectorAll("section").forEach(s=>obs.observe(s));
 </script>
-
-
-  </script>
 
 </body>
 </html>
