@@ -11,56 +11,50 @@
 
 body{
   background:#000;
-  color:#f2f2f2;
   font-family:'Cinzel', serif;
   overflow-x:hidden;
 }
 
-/* VOID */
+/* FUNDO */
 .void-bg{
   position:fixed;
   inset:0;
   background:radial-gradient(circle at center, rgba(140,0,255,.45), rgba(40,0,70,.85), #000 70%);
-  z-index:-4;
+  z-index:-5;
 }
 
-/* FOG */
 .fog{
   position:fixed;
   inset:0;
   background:url('https://i.imgur.com/N9bG5cQ.png');
   opacity:.08;
-  animation:fogmove 60s linear infinite;
-  z-index:-3;
-}
-@keyframes fogmove{
-  to{background-position:1000px 1000px;}
+  z-index:-4;
 }
 
-/* FUNDO DE PALAVRAS */
+/* PALAVRAS */
 #errorLayer{
   position:fixed;
   inset:0;
   pointer-events:none;
-  z-index:-2;
+  z-index:1; /* ← AGORA VISÍVEL */
 }
 
 .error-text{
   position:absolute;
   font-size:.75rem;
   text-transform:lowercase;
-  color:rgba(80,0,120,.6);
+  color:rgba(90,0,140,.75);
   text-shadow:
-    0 0 4px rgba(255,255,255,.35),
-    0 0 14px rgba(160,0,255,.7);
-  animation:fadeFloat linear forwards;
+    0 0 4px rgba(255,255,255,.5),
+    0 0 18px rgba(160,0,255,.9);
+  animation:fade 12s linear forwards;
 }
 
-@keyframes fadeFloat{
-  0%{opacity:0; transform:translateY(15px);}
-  15%{opacity:1;}
-  85%{opacity:1;}
-  100%{opacity:0; transform:translateY(-25px);}
+@keyframes fade{
+  0%{opacity:0}
+  10%{opacity:1}
+  90%{opacity:1}
+  100%{opacity:0}
 }
 
 /* HERO */
@@ -70,55 +64,17 @@ body{
   flex-direction:column;
   justify-content:center;
   align-items:center;
-  text-align:center;
-}
-
-.sigil{
-  width:320px;
-  filter:drop-shadow(0 0 25px rgba(180,0,255,.8));
-  animation:pulse 4s infinite;
-}
-@keyframes pulse{
-  50%{filter:drop-shadow(0 0 45px rgba(200,0,255,1));}
+  color:#f2e9ff;
 }
 
 h1{
   font-size:4rem;
   letter-spacing:10px;
-  text-transform:uppercase;
-  text-shadow:
-    0 0 5px #fff,
-    0 0 20px #9a00ff,
-    0 0 40px #5a00aa;
-  animation:glitch 2.5s infinite;
-}
-
-@keyframes glitch{
-  20%{text-shadow:-2px 0 red,2px 0 cyan;}
-  40%{text-shadow:2px 2px red,-2px -2px cyan;}
-  60%{text-shadow:-2px -2px red,2px 2px cyan;}
-}
-
-.ritual-line{
-  width:60%;
-  height:2px;
-  margin:30px;
-  background:linear-gradient(90deg,transparent,#b100ff,#ff00c8,#b100ff,transparent);
+  text-shadow:0 0 20px #b100ff;
 }
 
 section{
   min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:2rem;
-  opacity:0;
-  transform:translateY(80px);
-  transition:1s;
-}
-section.show{
-  opacity:1;
-  transform:none;
 }
 </style>
 </head>
@@ -130,18 +86,16 @@ section.show{
 <div id="errorLayer"></div>
 
 <div class="hero">
-  <img class="sigil" src="https://i.imgur.com/3KXQZcF.png">
   <h1>wassup.morte</h1>
-  <div class="ritual-line"></div>
 </div>
 
-<section>VÍDEOS</section>
-<section>FOTOS</section>
-<section>CONTATO</section>
+<section></section>
+<section></section>
+<section></section>
 
 <script>
 const phrases=[
-  "69","69","69","69","69","69","69",
+  "69","69","69","69","69",
   "jesus cristo reina",
   "morte",
   "loves",
@@ -151,34 +105,9 @@ const phrases=[
 ];
 
 const layer=document.getElementById("errorLayer");
-let lastScroll=0;
 
 function spawn(amount){
   for(let i=0;i<amount;i++){
     const t=document.createElement("div");
     t.className="error-text";
-    t.innerText=phrases[Math.floor(Math.random()*phrases.length)];
-    t.style.top=Math.random()*100+"%";
-    t.style.left=Math.random()*100+"%";
-    t.style.animationDuration=(8+Math.random()*10)+"s";
-    layer.appendChild(t);
-    setTimeout(()=>t.remove(),16000);
-  }
-}
-
-window.addEventListener("scroll",()=>{
-  if(Math.abs(scrollY-lastScroll)>30){
-    spawn(6+Math.floor(Math.random()*8));
-    lastScroll=scrollY;
-  }
-});
-
-const obs=new IntersectionObserver(e=>{
-  e.forEach(x=>x.isIntersecting&&x.target.classList.add("show"))
-},{threshold:.2});
-document.querySelectorAll("section").forEach(s=>obs.observe(s));
-</script>
-
-</body>
-</html>
-
+    t.innerText=phr
