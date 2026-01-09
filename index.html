@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<title>WASSUP.MORTE</title>
+<title>wassup.morte</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 
@@ -37,7 +37,7 @@ body{
   to{background-position:1000px 1000px;}
 }
 
-/* TEXTO DO FUNDO */
+/* FUNDO DE PALAVRAS */
 #errorLayer{
   position:fixed;
   inset:0;
@@ -49,18 +49,18 @@ body{
   position:absolute;
   font-size:.75rem;
   text-transform:lowercase;
-  color:rgba(80,0,120,.55);
+  color:rgba(80,0,120,.6);
   text-shadow:
     0 0 4px rgba(255,255,255,.35),
-    0 0 12px rgba(150,0,255,.6);
+    0 0 14px rgba(160,0,255,.7);
   animation:fadeFloat linear forwards;
 }
 
 @keyframes fadeFloat{
-  0%{opacity:0; transform:translateY(10px);}
-  10%{opacity:1;}
-  90%{opacity:1;}
-  100%{opacity:0; transform:translateY(-20px);}
+  0%{opacity:0; transform:translateY(15px);}
+  15%{opacity:1;}
+  85%{opacity:1;}
+  100%{opacity:0; transform:translateY(-25px);}
 }
 
 /* HERO */
@@ -141,11 +141,13 @@ section.show{
 
 <script>
 const phrases=[
-"69","69","69","69","69",
-"jesus cristo reina",
-"morte","loves",
-"error69","666",
-"jesus jesus"
+  "69","69","69","69","69","69","69",
+  "jesus cristo reina",
+  "morte",
+  "loves",
+  "error69",
+  "666",
+  "jesus jesus"
 ];
 
 const layer=document.getElementById("errorLayer");
@@ -165,8 +167,8 @@ function spawn(amount){
 }
 
 window.addEventListener("scroll",()=>{
-  if(Math.abs(scrollY-lastScroll)>40){
-    spawn(6+Math.floor(Math.random()*6));
+  if(Math.abs(scrollY-lastScroll)>30){
+    spawn(6+Math.floor(Math.random()*8));
     lastScroll=scrollY;
   }
 });
@@ -179,3 +181,4 @@ document.querySelectorAll("section").forEach(s=>obs.observe(s));
 
 </body>
 </html>
+
